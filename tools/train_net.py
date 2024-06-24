@@ -194,6 +194,8 @@ def do_train(args, cfg):
                 checkpointer (dict)
                 ddp (dict)
     """
+    #from IPython import embed; embed(); exit()
+
     model = instantiate(cfg.model)
     logger = logging.getLogger("detectron2")
     logger.info("Model:\n{}".format(model))
@@ -203,6 +205,7 @@ def do_train(args, cfg):
     optim = instantiate(cfg.optimizer)
 
     train_loader = instantiate(cfg.dataloader.train)
+
 
     model = create_ddp_model(model, **cfg.train.ddp)
 
@@ -250,6 +253,10 @@ def do_train(args, cfg):
 def main(args):
     cfg = LazyConfig.load(args.config_file)
     cfg = LazyConfig.apply_overrides(cfg, args.opts)
+
+    #from IPython import embed; embed(); exit()
+
+
     default_setup(cfg, args)
 
     if args.eval_only:
